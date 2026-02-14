@@ -1,59 +1,190 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MyHRIS — Human Resource Information System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem manajemen SDM berbasis web yang dibangun dengan Laravel 12. Dirancang untuk mempermudah pengelolaan data karyawan, kehadiran, jadwal kerja, pengajuan cuti, dan penggajian dalam satu platform terpadu.
 
-## About Laravel
+![PHP](https://img.shields.io/badge/PHP-8.2+-purple?logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-4-blue?logo=tailwindcss&logoColor=white)
+![DaisyUI](https://img.shields.io/badge/DaisyUI-5-green?logo=daisyui&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👥 Manajemen Karyawan
+- CRUD data karyawan lengkap (data pribadi, jabatan, departemen)
+- Kode karyawan otomatis
+- Onboarding karyawan baru via profil
 
-## Learning Laravel
+### 🏢 Struktur Organisasi
+- Manajemen **departemen** dan **jabatan**
+- Relasi antar entitas (departemen → jabatan → karyawan)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### ⏰ Shift & Jadwal Kerja
+- Pengaturan shift kerja (jam masuk, jam keluar)
+- Jadwal kerja bulanan dalam tampilan matrix
+- Penugasan shift per karyawan per hari
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📋 Kehadiran (Attendance)
+- Pencatatan kehadiran harian (time-in, time-out)
+- Statistik harian: hadir, terlambat, lembur
+- Filter berdasarkan tanggal
+- Detail kehadiran dengan lokasi GPS & peta (Leaflet.js)
+- Integrasi foto check-in/check-out
 
-## Laravel Sponsors
+### 📝 Pengajuan Cuti (Leave Request)
+- Pengajuan cuti oleh karyawan
+- Approval / rejection oleh HR dengan catatan penolakan
+- Manajemen tipe cuti (Annual, Sick, Maternity, dll.)
+- Statistik: pending, disetujui, jenis cuti
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 💰 Penggajian (Payroll)
+- Perhitungan gaji otomatis berdasarkan data kehadiran
+- Komponen: gaji pokok, tunjangan, lembur, potongan
+- Potongan otomatis untuk keterlambatan & absensi
+- Simulasi gaji real-time
+- Edit slip gaji manual
+- **Cetak slip gaji** (format A4, siap print)
+- Filter berdasarkan bulan & tahun
 
-### Premium Partners
+### 🌐 Multi Bahasa
+- Dukungan penuh **Bahasa Indonesia** dan **English**
+- Switching bahasa langsung dari UI
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 👤 Profil & Keamanan
+- Edit profil pengguna
+- Ubah password
+- Role-based access control (Admin, HRD) via Spatie Permission
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Tech Stack
 
-## Code of Conduct
+| Layer       | Teknologi                                                          |
+| ----------- | ------------------------------------------------------------------ |
+| Backend     | PHP 8.2+, Laravel 12                                               |
+| Frontend    | Blade, Alpine.js, Tailwind CSS 4, DaisyUI 5                       |
+| Build Tool  | Vite 7                                                             |
+| Icons       | Lucide Icons (via blade-lucide-icons)                              |
+| Maps        | Leaflet.js                                                         |
+| Auth        | Laravel Breeze                                                     |
+| Permissions | Spatie Laravel Permission                                          |
+| i18n        | Laravel Lang                                                       |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Arsitektur
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+app/
+├── Console/Commands/      # Artisan commands (dummy data generators)
+├── Http/
+│   ├── Controllers/       # Request handlers per modul
+│   └── Requests/          # Form request validation
+├── Models/                # Eloquent models
+└── Services/              # Business logic layer
 
-## License
+resources/
+├── views/
+│   ├── dashboard/         # Halaman modul (attendance, payroll, dll.)
+│   └── components/        # Reusable Blade components
+└── lang/
+    ├── id/                # Terjemahan Bahasa Indonesia
+    └── en/                # Terjemahan English
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Aplikasi menggunakan pola **Service Layer** — setiap controller mendelegasikan business logic ke service class masing-masing, menjaga controller tetap ringan dan mudah diuji.
+
+---
+
+## Instalasi
+
+### Prasyarat
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- MySQL / SQLite
+
+### Langkah Setup
+
+```bash
+# 1. Clone repository
+git clone https://github.com/ichsanhanifdeal/hris.git
+cd hris
+
+# 2. Install dependencies & setup otomatis
+composer setup
+```
+
+Perintah `composer setup` akan menjalankan:
+- `composer install`
+- Copy `.env.example` → `.env`
+- Generate application key
+- Jalankan migrasi database
+- `npm install` & `npm run build`
+
+### Konfigurasi Database
+
+Sesuaikan file `.env` dengan koneksi database Anda:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hris
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Jalankan Development Server
+
+```bash
+composer run dev
+```
+
+Perintah ini akan menjalankan secara bersamaan:
+- 🟦 Laravel server (`php artisan serve`)
+- 🟣 Queue listener
+- 🟥 Log viewer (Pail)
+- 🟧 Vite dev server
+
+---
+
+## Dummy Data
+
+Untuk keperluan testing, tersedia perintah Artisan untuk generate data dummy:
+
+```bash
+# Generate data kehadiran & jadwal
+php artisan app:attendance-dummy
+
+# Generate pengajuan cuti (default: 10 data)
+php artisan app:dummy-leave-request --count=20
+
+# Generate payroll berdasarkan data kehadiran
+php artisan app:dummy-payroll --month=2 --year=2026
+```
+
+---
+
+## Struktur Modul
+
+| Modul          | Controller               | Service                | Model          |
+| -------------- | ------------------------ | ---------------------- | -------------- |
+| Dashboard      | —                        | —                      | —              |
+| Karyawan       | EmployeeController       | EmployeeService        | Employee       |
+| Departemen     | DepartmentController     | DepartmentService      | Department     |
+| Jabatan        | PositionController       | PositionService        | Position       |
+| Shift          | ShiftController          | ShiftService           | Shift          |
+| Jadwal Kerja   | SchedulesController      | SchedulesService       | Schedule       |
+| Kehadiran      | AttendanceController     | AttendanceService      | Attendance     |
+| Tipe Cuti      | LeaveTypeController      | LeaveTypeService       | LeaveType      |
+| Pengajuan Cuti | LeaveRequestController   | LeaveRequestService    | LeaveRequest   |
+| Penggajian     | PayrollController        | PayrollService         | Payroll        |
+| Profil         | ProfileController        | —                      | User           |
+
+---
+
+## Lisensi
+
+Project ini bersifat private dan dikembangkan untuk keperluan internal.
