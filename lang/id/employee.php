@@ -1,0 +1,45 @@
+<?php
+return [
+    'title' => 'Manajemen Karyawan',
+    'subtitle' => 'Kelola informasi personal dan pekerjaan karyawan.',
+    'stats' => [
+        'latest' => 'Karyawan Terbaru',
+        'total' => 'Total Karyawan',
+        'pending_leave' => 'Cuti Menunggu',
+    ],
+    'table' => [
+        'title' => 'Daftar Karyawan',
+        'th_no' => 'No',
+        'th_name' => 'Nama Karyawan',
+        'th_position' => 'Jabatan',
+        'th_dept' => 'Departemen',
+        'th_status' => 'Status',
+        'th_action' => 'Aksi',
+        'empty' => 'Belum ada data karyawan.',
+    ],
+    'modal' => [
+        'add_title' => 'Tambah Karyawan Baru',
+        'label_name' => 'Nama Lengkap',
+        'label_email' => 'Alamat Email',
+        'label_code' => 'NIP / Kode Karyawan',
+        'label_gender' => 'Jenis Kelamin',
+        'label_position' => 'Jabatan',
+        'label_dept' => 'Departemen',
+        'label_address' => 'Alamat Lengkap',
+        'placeholder_name' => 'Masukkan nama lengkap...',
+        'placeholder_email' => 'contoh@perusahaan.com',
+        'placeholder_code' => 'EMP-2026-XXX',
+        'placeholder_address' => 'Alamat tinggal sekarang...',
+        'info_password' => 'Password akan di-generate otomatis oleh sistem dan dikirim via email.',
+        'btn_save' => 'Onboard Karyawan',
+    ],
+    'gender' => [
+        'male' => 'Laki-laki',
+        'female' => 'Perempuan',
+    ],
+    'status' => [
+        'active' => 'Aktif',
+        'inactive' => 'Non-Aktif',
+    ],
+    'label_people' => 'Orang',
+];
