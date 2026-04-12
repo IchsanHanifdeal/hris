@@ -5,16 +5,13 @@
     @include('components.main.head')
 
     <style>
-        /* 1. Alpine Cloak */
         [x-cloak] { display: none !important; }
 
-        /* 2. Custom Scrollbar (Biar kerasa Premium) */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #282a36; }
         ::-webkit-scrollbar-thumb { background: #44475a; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #6272a4; }
 
-        /* 3. Animasi Fade In (Pengganti animate-[fade-in]) */
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -23,7 +20,6 @@
             animation: fade-in 0.5s ease-out forwards;
         }
 
-        /* 4. Animasi Gradient Teks (Pengganti config theme.extend) */
         @keyframes gradient-move {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -37,7 +33,6 @@
             animation: gradient-move 3s linear infinite;
         }
 
-        /* 5. Blob Animation (Buat background yang gerak-gerak) */
         @keyframes blob-bounce {
             0% { transform: translate(0px, 0px) scale(1); }
             33% { transform: translate(30px, -50px) scale(1.1); }
@@ -67,10 +62,10 @@
             
             <div class="text-center z-10 space-y-2">
                 <h1 class="text-4xl font-extrabold tracking-widest">
-                    {{ __('seo.app_name') }}
+                    {{ __('seo.loading') }}
                 </h1>
                 <p class="text-xs font-bold tracking-[0.3em] text-base-content/50 uppercase">
-                    {{ __('seo.tagline') }}
+                    {{ __('seo.please_wait') }}
                 </p>
             </div>
         </div>
@@ -111,5 +106,6 @@
             });
         }
     </script>
+    @stack('scripts')
 </body>
 </html>

@@ -1,38 +1,55 @@
-<nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#282a36]/90 backdrop-blur-xl border-t border-[#44475a] safe-area-bottom shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
-    <div class="flex items-center justify-around h-20 px-2 relative">
-        
-        <a href="{{ route('dashboard') }}" 
-           class="flex flex-col items-center justify-center w-full gap-1 transition-all duration-300 {{ request()->routeIs('dashboard') ? 'text-[#bd93f9]' : 'text-[#6272a4] hover:text-[#bd93f9]/60' }}">
-            <x-lucide-home class="{{ request()->routeIs('dashboard') ? 'size-6 stroke-[2.5]' : 'size-5 stroke-[1.5]' }}" />
-            <span class="text-[10px] font-black uppercase tracking-tighter">{{ __('menu.home') ?? 'Home' }}</span>
-        </a>
+@php
+    $isDashboard  = request()->routeIs('dashboard');
+    $isLeave      = request()->routeIs('leave-requests.*');
+    $isAttendance = request()->routeIs('attendance.*');
+    $isWork       = request()->routeIs('attendance.mywork');
+    $isProfile    = request()->routeIs('profile.*');
+@endphp
 
-        <a href="#" class="flex flex-col items-center justify-center w-full gap-1 text-[#6272a4] hover:text-[#bd93f9]/60 transition-all">
-            <x-lucide-layout-grid class="size-5 stroke-[1.5]" />
-            <span class="text-[10px] font-black uppercase tracking-tighter">Menu</span>
-        </a>
-        
-        <div class="relative w-full flex justify-center -mt-10">
-            <a href="{{ route('attendances.index') }}" class="flex flex-col items-center gap-1 group">
-                <div class="size-16 bg-gradient-to-tr from-[#bd93f9] to-[#ff79c6] rounded-2xl shadow-xl shadow-[#bd93f9]/20 flex items-center justify-center text-[#282a36] border-[6px] border-[#282a36] transform transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:rotate-12">
-                    <x-lucide-alarm-clock class="size-8 stroke-[2]" />
-                </div>
-                <span class="text-[10px] font-black uppercase tracking-tighter mt-1 {{ request()->routeIs('attendances.*') ? 'text-[#bd93f9]' : 'text-[#6272a4]' }}">
-                    {{ __('menu.attendance') ?? 'Record' }}
-                </span>
-            </a>
+<div class="absolute bottom-0 w-full max-w-md mx-auto z-[9000] bg-base-100/95 backdrop-blur-xl pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border-t border-base-200 flex justify-around items-center h-16 sm:h-[4.5rem] px-2">
+
+    <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center w-16 h-full gap-1 transition-all duration-300 group">
+        <div class="relative">
+            @if($isDashboard)
+                <div class="absolute -inset-2 bg-primary/20 blur-md rounded-full"></div>
+            @endif
+            <x-lucide-home class="relative transition-all duration-500 {{ $isDashboard ? 'text-primary size-6 stroke-[2.5] scale-110 drop-shadow-sm' : 'text-base-content/30 size-5 stroke-[1.5] group-hover:scale-110' }}" />
         </div>
+        <span class="text-[9px] font-black tracking-[0.05em] uppercase transition-colors {{ $isDashboard ? 'text-primary' : 'text-base-content/30 group-hover:text-primary/70' }}">
+            {{ __('menu.home') ?? 'Home' }}
+        </span>
+    </a>
 
-        <a href="#" class="flex flex-col items-center justify-center w-full gap-1 text-[#6272a4] hover:text-[#bd93f9]/60 transition-all">
-            <x-lucide-briefcase class="size-5 stroke-[1.5]" />
-            <span class="text-[10px] font-black uppercase tracking-tighter">My Work</span>
-        </a>
+    <a href="{{ route('leave-requests.index') }}" class="flex flex-col items-center justify-center w-16 h-full gap-1 transition-all duration-300 group">
+        <x-lucide-calendar-days class="transition-all duration-500 {{ $isLeave ? 'text-secondary size-6 stroke-[2.5] scale-110 drop-shadow-sm' : 'text-base-content/30 size-5 stroke-[1.5] group-hover:scale-110' }}" />
+        <span class="text-[9px] font-black tracking-[0.05em] uppercase transition-colors {{ $isLeave ? 'text-secondary' : 'text-base-content/30 group-hover:text-secondary/70' }}">
+            {{ __('menu.leave') ?? 'Cuti' }}
+        </span>
+    </a>
 
-        <a href="{{ route('profile.edit') }}" 
-           class="flex flex-col items-center justify-center w-full gap-1 transition-all duration-300 {{ request()->routeIs('profile.*') ? 'text-[#bd93f9]' : 'text-[#6272a4] hover:text-[#bd93f9]/60' }}">
-            <x-lucide-user class="{{ request()->routeIs('profile.*') ? 'size-6 stroke-[2.5]' : 'size-5 stroke-[1.5]' }}" />
-            <span class="text-[10px] font-black uppercase tracking-tighter">{{ __('menu.profile') ?? 'Profile' }}</span>
-        </a>
+    <a href="{{ route('attendance.index') }}" class="relative w-16 h-full flex flex-col items-center group">
+        <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-14 h-14 bg-gradient-to-tr from-primary to-primary-focus text-primary-content rounded-2xl flex items-center justify-center shadow-xl shadow-primary/30 border-[4px] border-base-100 transition-all duration-500 transform group-hover:-translate-y-1 group-active:scale-90 group-active:rotate-6 z-50">
+            <x-lucide-alarm-clock class="size-7.5 stroke-[2.5] {{ $isAttendance ? 'animate-pulse' : '' }}" />
+        </div>
+        <div class="mt-auto pb-1.5 flex flex-col items-center">
+            <span class="text-[9px] font-black tracking-[0.05em] uppercase transition-colors duration-300 {{ $isAttendance ? 'text-primary' : 'text-base-content/30 group-hover:text-primary/70' }}">
+                {{ __('menu.attendance') ?? 'Record' }}
+            </span>
+        </div>
+    </a>
 
-    </div>
-</nav>
+    <a href="{{ route('attendance.mywork') }}" class="flex flex-col items-center justify-center w-16 h-full gap-1 transition-all duration-300 group">
+        <x-lucide-briefcase class="transition-all duration-500 {{ $isWork ? 'text-accent size-6 stroke-[2.5] scale-110 drop-shadow-sm' : 'text-base-content/30 size-5 stroke-[1.5] group-hover:scale-110' }}" />
+        <span class="text-[9px] font-black tracking-[0.05em] uppercase transition-colors {{ $isWork ? 'text-accent' : 'text-base-content/30 group-hover:text-accent/70' }}">
+            {{  __('menu.my_work') ?? 'History'  }}
+        </span>
+    </a>
+
+    <a href="{{ route('profile.edit') }}" class="flex flex-col items-center justify-center w-16 h-full gap-1 transition-all duration-300 group">
+        <x-lucide-user class="transition-all duration-500 {{ $isProfile ? 'text-accent size-6 stroke-[2.5] scale-110 drop-shadow-sm' : 'text-base-content/30 size-5 stroke-[1.5] group-hover:scale-110' }}" />
+        <span class="text-[9px] font-black tracking-[0.05em] uppercase transition-colors {{ $isProfile ? 'text-accent' : 'text-base-content/30 group-hover:text-accent/70' }}">
+            {{ __('menu.profile') ?? 'Profile' }}
+        </span>
+    </a>
+
+</div>

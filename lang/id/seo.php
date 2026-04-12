@@ -26,6 +26,8 @@ return [
     'og_description' => 'Tinggalkan cara manual. Kelola absensi, cuti, dan gaji karyawan secara real-time, akurat, dan berbasis lokasi (GPS).',
     'og_locale'      => 'id_ID',
     'og_site_name'   => 'Kelola SDM Enterprise',
+    'loading'        => 'Memuat...',
+    'please_wait'    => 'Mohon tunggu...',
 
     'twitter_title'       => 'Kelola SDM - HRIS Modern Berbasis GPS',
     'twitter_description' => 'Pantau kehadiran tim dan kelola gaji tanpa ribet. Coba demo aplikasi HRIS modern sekarang.',

@@ -1,4 +1,5 @@
-<x-main.main title="{{ $title ?? 'HRIS Dashboard' }}">
+@php $setting = \App\Models\Setting::first(); @endphp
+<x-main.main title="{{ $title ?? ($setting->app_name ?? 'HRIS Dashboard') }}">
 
     @if (Auth::check() && Auth::user()->hasRole('karyawan') && !Auth::user()->employee)
         

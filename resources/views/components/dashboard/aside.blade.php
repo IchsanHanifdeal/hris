@@ -9,16 +9,18 @@
                [&>li>a]:gap-3 [&>li]:my-1 [&>li]:font-medium [&>li]:text-[14.5px]
                [&>_*_svg]:stroke-[1.5] [&>_*_svg]:size-[20px]">
         
+        @php $setting = \App\Models\Setting::first(); @endphp
         <div class="pb-6 mb-4 border-b border-base-content/10 flex items-center gap-4 px-2 pt-2">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20 text-white">
-                <x-lucide-command class="w-6 h-6" />
-            </div>
+            @if($setting && $setting->app_logo)
+                <img src="{{ asset('storage/' . $setting->app_logo) }}" class="w-10 h-10 rounded-xl object-contain shadow-lg shadow-primary/10">
+            @else
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20 text-white">
+                    <x-lucide-command class="w-6 h-6" />
+                </div>
+            @endif
             <div>
-                <span class="block text-lg font-bold tracking-tight text-base-content leading-none">
-                    {{ config('app.name', 'HRIS PRO') }}
-                </span>
-                <span class="text-xs font-medium text-base-content/50 tracking-wide mt-1 block">
-                    ENTERPRISE
+                <span class="block text-lg font-black tracking-tight text-base-content leading-none">
+                    {{ $setting->app_name ?? config('app.name', 'HRIS PRO') }}
                 </span>
             </div>
         </div>
@@ -98,10 +100,21 @@
             </a>
         </li>
 
-        <li>
+        {{-- <li>
             <a href="{{ route('payrolls.index') }}" class="{{ request()->routeIs('payrolls.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
                 <x-lucide-banknote />
                 {{ __('menu.payroll') }}
+            </a>
+        </li> --}}
+
+        <span class="px-4 text-[11px] font-bold text-base-content/40 uppercase tracking-wider mb-2 mt-6">
+            {{ __('menu.settings') }}
+        </span>
+
+        <li>
+            <a href="{{ route('settings.index') }}" class="{{ request()->routeIs('settings.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <x-lucide-settings />
+                {{ __('menu.settings') }}
             </a>
         </li>
 
@@ -127,46 +140,43 @@
     </ul>
 </div>
 
-        <dialog id="logout_modal" class="modal modal-bottom sm:modal-middle transition-all duration-300">
-            <div class="modal-box bg-base-100/80 backdrop-blur-2xl border border-base-content/10 rounded-[2rem] shadow-2xl p-8">
+    <dialog id="logout_modal" class="modal modal-bottom sm:modal-middle transition-all duration-300">
+        <div class="modal-box bg-base-100/80 backdrop-blur-2xl border border-base-content/10 rounded-[2rem] shadow-2xl p-8">
+            
+            <div class="flex flex-col items-center text-center space-y-4">
+                <div class="w-20 h-20 rounded-3xl bg-error/10 flex items-center justify-center text-error mb-2 rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <x-lucide-log-out class="w-10 h-10" />
+                </div>
                 
-                <div class="flex flex-col items-center text-center space-y-4">
-                    <div class="w-20 h-20 rounded-3xl bg-error/10 flex items-center justify-center text-error mb-2 rotate-3 hover:rotate-0 transition-transform duration-500">
-                        <x-lucide-log-out class="w-10 h-10" />
-                    </div>
-                    
-                    <h3 class="font-black text-2xl text-base-content tracking-tight">
-                        {{ __('menu.logout_confirm_title') }}
-                    </h3>
-                    
-                    <p class="text-base-content/60 leading-relaxed max-w-xs">
-                        {{ __('menu.logout_confirm_msg') }}
-                    </p>
-                </div>
-
-                <div class="modal-action grid grid-cols-2 gap-4 mt-8">
-                    <form method="dialog" class="w-full">
-                        <button class="btn btn-ghost w-full h-14 rounded-2xl border border-base-content/5 hover:bg-base-200 transition-all font-bold">
-                            {{ __('menu.cancel') }}
-                        </button>
-                    </form>
-                    
-                    <form method="POST" action="{{ route('logout') }}" class="w-full">
-                        @csrf
-                        <button type="submit" class="btn btn-error w-full h-14 rounded-2xl text-white shadow-xl shadow-error/20 hover:scale-[1.02] active:scale-95 transition-all font-bold">
-                            {{ __('menu.yes_logout') }}
-                        </button>
-                    </form>
-                </div>
-
-                <form method="dialog" class="absolute right-4 top-4">
-                    <button class="btn btn-sm btn-circle btn-ghost opacity-30 hover:opacity-100">
-                        <x-lucide-x class="w-4 h-4" />
+                <h3 class="font-black text-2xl text-base-content tracking-tight">
+                    {{ __('menu.logout_confirm_title') }}
+                </h3>
+                
+                <p class="text-base-content/60 leading-relaxed max-w-xs">
+                    {{ __('menu.logout_confirm_msg') }}
+                </p>
+            </div>
+            <div class="modal-action grid grid-cols-2 gap-4 mt-8">
+                <form method="dialog" class="w-full">
+                    <button class="btn btn-ghost w-full h-14 rounded-2xl border border-base-content/5 hover:bg-base-200 transition-all font-bold">
+                        {{ __('menu.cancel') }}
+                    </button>
+                </form>
+                
+                <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="btn btn-error w-full h-14 rounded-2xl text-white shadow-xl shadow-error/20 hover:scale-[1.02] active:scale-95 transition-all font-bold">
+                        {{ __('menu.yes_logout') }}
                     </button>
                 </form>
             </div>
-
-            <form method="dialog" class="modal-backdrop bg-base-900/60 backdrop-blur-md transition-all duration-500">
-                <button>close</button>
+            <form method="dialog" class="absolute right-4 top-4">
+                <button class="btn btn-sm btn-circle btn-ghost opacity-30 hover:opacity-100">
+                    <x-lucide-x class="w-4 h-4" />
+                </button>
             </form>
-        </dialog>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-base-900/60 backdrop-blur-md transition-all duration-500">
+            <button>close</button>
+        </form>
+    </dialog>

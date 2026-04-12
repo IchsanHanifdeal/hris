@@ -1,12 +1,13 @@
-<head>
+@php $setting = \App\Models\Setting::first(); @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @laravelPWA
 
     <title>
-        @hasSection('title')
-            @yield('title') | {{ config('app.name', 'HRIS Kelola SDM') }}
+        @if(trim($__env->yieldContent('title')))
+            @yield('title') | {{ $setting->app_name ?? config('app.name', 'HRIS PRO') }}
         @else
-            {{ __('seo.default_title') }}
+            {{ $setting->app_name ?? config('app.name', 'HRIS PRO') }}
         @endif
     </title>
 
@@ -30,7 +31,11 @@
     <meta name="twitter:description" content="@yield('description', __('seo.twitter_description'))">
     <meta name="twitter:image" content="@yield('image', asset('images/og-preview.jpg'))">
 
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @if($setting && $setting->app_favicon)
+        <link rel="icon" href="{{ asset('storage/' . $setting->app_favicon) }}" type="image/x-icon">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,4 +49,3 @@
     @stack('styles')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>

@@ -12,7 +12,6 @@ class SchedulesService
 {
     public function getMatrixData(array $filters = [])
     {
-        // 1. Inisialisasi Rentang Tanggal
         $month = $filters['month'] ?? now()->format('Y-m');
         $startOfMonth = Carbon::parse($month)->startOfMonth();
         $endOfMonth = Carbon::parse($month)->endOfMonth();
@@ -22,7 +21,6 @@ class SchedulesService
             $daysInMonth[] = $date->copy();
         }
 
-        // 2. Query Employee dengan Paginator (Biar hasPages() jalan)
         $employees = Employee::with(['user', 'schedules' => function($q) use ($startOfMonth, $endOfMonth) {
                 $q->whereBetween('date', [$startOfMonth->format('Y-m-d'), $endOfMonth->format('Y-m-d')])
                   ->with('shift');
@@ -31,7 +29,7 @@ class SchedulesService
                 $q->whereHas('user', fn($query) => $query->where('name', 'like', "%{$search}%"))
                   ->orWhere('employee_code', 'like', "%{$search}%");
             })
-            ->paginate(15) // Kuncinya di sini biar dapet method Paginator
+            ->paginate(15) 
             ->withQueryString();
 
         return [
@@ -66,7 +64,6 @@ class SchedulesService
             $records = [];
 
             while ($start->lte($end)) {
-                // Senior Way: Cek duplicate biar gak Double Booking
                 $exists = Schedule::where('employee_id', $data['employee_id'])
                     ->where('date', $start->format('Y-m-d'))
                     ->exists();

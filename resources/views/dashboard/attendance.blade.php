@@ -70,7 +70,7 @@
 
                 <td class="text-center">
                     <div class="badge badge-ghost bg-base-200/50 border-none font-black text-[9px] uppercase tracking-widest py-3 px-4 rounded-xl">
-                        {{ $item->shift->name }}
+                        {{ $item->shift->name ?? '-' }}
                     </div>
                 </td>
 

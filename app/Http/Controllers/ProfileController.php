@@ -16,9 +16,15 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        if($request->user()->hasRole('karyawan')){
+            return view('pwa.profile.edit', [
+                'user' => $request->user(),
+            ]);
+        }else{
+            return view('profile.edit', [
+                'user' => $request->user(),
+            ]);
+        }
     }
 
     /**

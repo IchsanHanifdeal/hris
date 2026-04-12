@@ -105,7 +105,7 @@
 
                     <div class="form-control mt-6">
                         <label class="label px-1"><span class="label-text font-black text-[10px] uppercase opacity-40">{{ __('employee.modal.label_address') }}</span></label>
-                        <textarea name="address" class="textarea textarea-bordered bg-base-200/50 rounded-2xl min-h-[100px] font-bold text-sm w-full focus:border-secondary transition-all" placeholder="{{ __('employee.modal.placeholder_address') }}">{{ old('address') }}</textarea>
+                        <textarea name="address" class="textarea textarea-bordered bg-base-200/50 rounded-2xl min-h-[100px] font-bold text-sm w-full focus:border-secondary transition-all" placeholder="{{ __('employee.modal.placeholder_address') }}" required>{{ old('address') }}</textarea>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 mt-12 pt-8 border-t border-base-content/5">

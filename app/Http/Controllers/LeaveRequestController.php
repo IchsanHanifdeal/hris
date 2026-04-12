@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
 use App\Services\LeaveRequestService;
+use Illuminate\Support\Facades\Auth;
 
 class LeaveRequestController extends Controller
 {
@@ -20,64 +21,49 @@ class LeaveRequestController extends Controller
 
     public function index()
     {
-        $requests = $this->leaveRequestService->getPendingRequests();
-        
-        // Data statistik buat info cards di atas
-        $pendingCount = LeaveRequest::where('status', 'pending')->count();
-        $approvedCount = LeaveRequest::where('status', 'approved')
-            ->whereMonth('created_at', now()->month)->count();
-        $leaveTypesCount = \App\Models\LeaveType::count();
+        if(Auth::user()->hasRole('karyawan')) {
+            $data = $this->leaveRequestService->getFormData();
+            return view('pwa.leave-request', $data);
+        } else {
+            $requests = $this->leaveRequestService->getPendingRequests();
+            
+            $pendingCount = LeaveRequest::where('status', 'pending')->count();
+            $approvedCount = LeaveRequest::where('status', 'approved')
+                ->whereMonth('created_at', now()->month)->count();
+            $leaveTypesCount = \App\Models\LeaveType::count();
 
-        return view('dashboard.leave-request', compact(
-            'requests', 'pendingCount', 'approvedCount', 'leaveTypesCount'
-        ));
+            return view('dashboard.leave-request', compact(
+                'requests', 'pendingCount', 'approvedCount', 'leaveTypesCount'
+            ));
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(\App\Http\Requests\LeaveRequestStoreRequest $request)
     {
-        //
+        try {
+            $this->leaveRequestService->storeLeaveRequest($request->validated(), Auth::user());
+            return redirect()->route('attendance.mywork')->with('success', 'Pengajuan cuti berhasil dikirim.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage())->withInput();
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function getQuota($leaveTypeId)
     {
-        //
+        $quota = $this->leaveRequestService->getRemainingQuota(Auth::user()->employee->id, $leaveTypeId);
+        return response()->json(['quota' => $quota]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function updateStatus(LeaveRequest $leaveRequest, $status, Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $this->leaveRequestService->processStatus($leaveRequest, [
+                'status' => $status,
+                'rejection_note' => $request->get('rejection_note')
+            ]);
+            return redirect()->back()->with('success', "Permohonan cuti berhasil di-{$status}.");
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

@@ -26,6 +26,8 @@ return [
     'og_description' => 'Leave manual processes behind. Manage attendance, leave, and employee payroll in real-time, accurately, and with GPS-based location tracking.',
     'og_locale'      => 'en_US',
     'og_site_name'   => 'Kelola SDM Enterprise',
+    'loading'        => 'Loading...',
+    'please_wait'    => 'Please wait...',
 
     'twitter_title'       => 'Kelola SDM - Modern GPS-Based HRIS',
     'twitter_description' => 'Track team attendance and manage payroll effortlessly. Try our modern HRIS application demo now.',

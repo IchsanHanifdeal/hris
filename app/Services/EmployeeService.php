@@ -48,6 +48,8 @@ class EmployeeService
                 'locale'   => $data['locale'] ?? 'id',
             ]);
 
+            $user->assignRole('karyawan');
+
             $data['employee_code'] = $this->generateEmployeeCode(
                 $data['department_id'], 
                 $data['position_id']

@@ -130,7 +130,7 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="form-control">
-                                    <label class="label px-1 mb-1 text-[9px] font-black uppercase tracking-widest opacity-30">{{ __('profile.new_password') }}</label>
+                                    <label class="label px-1 mb-1 text-[9px] font-black uppercase tracking-widest opacity-30">{{ __('profile.new_password') }}</label><br>
                                     <input type="password" name="password" placeholder="••••••••" 
                                         class="input input-bordered bg-base-200/30 border-none rounded-xl font-bold text-xs h-12 px-5 transition-all focus:ring-2 ring-primary/20" />
                                 </div>

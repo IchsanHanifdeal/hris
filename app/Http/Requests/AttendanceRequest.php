@@ -11,14 +11,18 @@ class AttendanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'employee_id' => 'required|exists:employees,id',
+            'employee_id' => 'sometimes|exists:employees,id',
             'shift_id'    => 'nullable|exists:shifts,id',
             'schedule_id' => 'nullable|exists:schedules,id', 
-            'date'        => 'required|date',
+            'date'        => 'sometimes|date',
             'time_in'     => 'nullable|date_format:H:i:s',
+            'latitude'    => 'nullable|numeric|between:-90,90',
+            'longitude'   => 'nullable|numeric|between:-180,180',
+            'accuracy'    => 'nullable|numeric',
+            'image'       => 'nullable|string',
             'lat_in'      => 'nullable|numeric|between:-90,90', 
             'long_in'     => 'nullable|numeric|between:-180,180', 
-            'status'      => 'required|in:on_time,late,overtime', 
+            'status'      => 'sometimes|in:on_time,late,overtime', 
         ];
     }
 }

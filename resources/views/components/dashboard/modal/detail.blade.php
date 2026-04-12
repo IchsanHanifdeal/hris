@@ -98,12 +98,14 @@
                 <div class="p-5 bg-base-200/50 rounded-2xl space-y-2">
                     <div class="flex justify-between items-center">
                         <span class="text-[10px] font-black opacity-30 uppercase">Shift</span>
-                        <span class="badge badge-ghost font-bold text-[10px]">{{ $attendance->shift->name }}</span>
+                        <span class="badge badge-ghost font-bold text-[10px]">{{ $attendance->shift?->name ?? '-' }}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-[10px] font-black opacity-30 uppercase">Schedule Range</span>
-                        <span class="text-[10px] font-mono font-bold">{{ substr($attendance->shift->start_time, 0, 5) }}
-                            - {{ substr($attendance->shift->end_time, 0, 5) }}</span>
+                        <span class="text-[10px] font-mono font-bold">
+                            {{ $attendance->shift ? substr($attendance->shift->start_time, 0, 5) : '-' }}
+                            - {{ $attendance->shift ? substr($attendance->shift->end_time, 0, 5) : '-' }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -115,7 +117,6 @@
             const modal = document.getElementById('view_attendance_{{ $attendance->id }}');
             let mapInstance = null;
 
-            // Senior Way: Pake Observer buat deteksi modal kebuka (lebih sakti dari event listener biasa)
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.attributeName === 'open' && modal.open && !mapInstance) {
@@ -123,7 +124,6 @@
                             const lat = {{ $attendance->lat_in ?? -6.200000 }};
                             const lng = {{ $attendance->long_in ?? 106.816666 }};
 
-                            // Inisialisasi Map
                             mapInstance = L.map('map_{{ $attendance->id }}').setView([lat, lng], 15);
 
                             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -134,7 +134,6 @@
                                 .bindPopup('<b>{{ addslashes($attendance->employee->user->name) }}</b><br>Check-in Location')
                                 .openPopup();
 
-                            // Penting: invalidateSize biar tile-nya gak pecah/abu-abu
                             mapInstance.invalidateSize();
                         }, 400);
                     }
