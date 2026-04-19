@@ -8,9 +8,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#4f46e5">
+    @pwaHead($setting?->pwa_logo ? 'storage/' . $setting->pwa_logo : 'logo.png', '#121212')
 
     <title>{{ $title ?? ($setting->pwa_name ?? ($setting->app_name ?? config('app.name'))) }}</title>
 
@@ -63,6 +61,7 @@
 
     </div>
 
+    @laravelPwa
     @stack('scripts')
 </body>
 </html>

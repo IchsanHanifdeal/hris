@@ -89,6 +89,17 @@ class MasterDataSeeder extends Seeder
                 'gender' => 'male',
                 'address' => 'West Jakarta, Jakarta, Indonesia',
             ]);
+
+            \App\Models\Setting::create([
+                'app_name' => 'HRIS PRO',
+                'pwa_name' => 'HRIS PRO',
+                'check_in_time' => '08:00:00',
+                'check_out_time' => '17:00:00',
+                'address' => 'Jakarta, Indonesia',
+                'latitude' => '-6.175392',
+                'longitude' => '106.827153',
+                'radius' => 100,
+            ]);
         });
     }
 }

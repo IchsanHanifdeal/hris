@@ -283,7 +283,7 @@
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 480, height: 480 } });
 
-                const { value: confirmed } = await Swal.fire({
+                const { value: imageData } = await Swal.fire({
                     title: `<span class="text-xs font-black uppercase tracking-[0.2em] opacity-40">${translations.face_verification}</span>`,
                     html: `
                         <div class="relative w-full aspect-square bg-base-300 rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl mt-4">
@@ -311,20 +311,24 @@
                         const video = document.getElementById('webcam');
                         video.srcObject = stream;
                     },
+                    preConfirm: () => {
+                        const video = document.getElementById('webcam');
+                        if (!video || video.videoWidth === 0) {
+                            Swal.showValidationMessage('Kamera belum siap, silakan coba lagi');
+                            return false;
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        canvas.getContext('2d').drawImage(video, 0, 0);
+                        return canvas.toDataURL('image/png');
+                    },
                     willClose: () => {
                         stream.getTracks().forEach(track => track.stop());
                     }
                 });
 
-                if (!confirmed) return;
-
-                // 2. Capture Image from Video
-                const canvas = document.createElement('canvas');
-                const video = document.getElementById('webcam');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                canvas.getContext('2d').drawImage(video, 0, 0);
-                const imageData = canvas.toDataURL('image/png');
+                if (!imageData) return;
 
                 // 3. Process Submission
                 btn.disabled = true;

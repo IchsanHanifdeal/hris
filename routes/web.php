@@ -24,6 +24,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/manifest.json', [\App\Http\Controllers\PwaController::class, 'manifest']);
+Route::get('/sw.js', [\App\Http\Controllers\PwaController::class, 'serviceWorker']);
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
