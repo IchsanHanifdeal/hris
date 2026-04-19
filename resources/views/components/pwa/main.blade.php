@@ -35,6 +35,7 @@
         
         .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
     </style>
+    @laravelPwa
 </head>
 
 <body class="h-[100dvh] font-sans antialiased bg-base-200 text-base-content selection:bg-primary selection:text-white overflow-hidden flex justify-center">
@@ -60,8 +61,6 @@
         </div>
 
     </div>
-
-    @laravelPwa
     @stack('scripts')
 </body>
 </html>

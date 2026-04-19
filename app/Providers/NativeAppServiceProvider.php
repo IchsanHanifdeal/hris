@@ -14,7 +14,7 @@ class NativeAppServiceProvider extends ServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
-        if (app()->runningInConsole()) {
+        if (app()->runningInConsole() || ! env('NATIVEPHP_RUNNING')) {
             return;
         }
 
