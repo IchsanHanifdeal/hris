@@ -1,25 +1,25 @@
 <?php
 return [
-    'title' => 'Jabatan',
-    'subtitle' => 'Kelola posisi jabatan dan standar gaji pokok karyawan.',
+    'title' => 'Struktur Jabatan',
+    'subtitle' => 'Manajemen tingkatan jabatan dan standar remunerasi dasar.',
     'stats' => [
-        'total' => 'Total Jabatan',
-        'avg_salary' => 'Rata-rata Gaji Pokok',
+        'total' => 'Total Posisi',
+        'avg_salary' => 'Rata-rata Gaji Dasar',
     ],
     'table' => [
-        'title' => 'Daftar Jabatan',
+        'title' => 'Direktori Jabatan',
         'th_no' => 'No',
         'th_name' => 'Nama Jabatan',
-        'th_salary' => 'Gaji Pokok',
+        'th_salary' => 'Remunerasi Dasar',
         'th_action' => 'Aksi',
-        'empty' => 'Belum ada data jabatan.',
+        'empty' => 'Belum ada data jabatan terekam.',
     ],
     'modal' => [
-        'add_title' => 'Tambah Jabatan Baru',
-        'edit_title' => 'Edit Jabatan',
+        'add_title' => 'Tambah Struktur Jabatan',
+        'edit_title' => 'Penyesuaian Jabatan',
         'label_name' => 'Nama Jabatan',
         'label_salary' => 'Gaji Pokok',
-        'placeholder_name' => 'Contoh: Senior Developer',
-        'btn_save' => 'Simpan Jabatan',
+        'placeholder_name' => 'Contoh: Manajer Operasional',
+        'btn_save' => 'Simpan Perubahan',
     ],
 ];

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 
 <head>
     @include('components.main.head')
@@ -8,9 +8,9 @@
         [x-cloak] { display: none !important; }
 
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #282a36; }
-        ::-webkit-scrollbar-thumb { background: #44475a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6272a4; }
+        ::-webkit-scrollbar-track { background: #f9fafb; }
+        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(10px); }

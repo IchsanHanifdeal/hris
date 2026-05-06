@@ -40,7 +40,7 @@
                     </div>
                     <div class="avatar">
                         <div class="w-9 rounded-xl ring ring-primary/20 ring-offset-base-100 ring-offset-2">
-                            <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&color=ff79c6&background=44475a" />
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&color=4c566a&background=e5e9f0" />
                         </div>
                     </div>
                 </div>

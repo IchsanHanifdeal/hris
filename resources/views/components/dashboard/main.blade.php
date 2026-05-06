@@ -12,8 +12,8 @@
             <div class="w-full max-w-3xl bg-base-100/80 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl border border-white/10 p-8 sm:p-12 relative z-10">
 
                 <div class="mb-10 text-center">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-tr from-primary to-secondary mb-6 shadow-2xl shadow-primary/20 rotate-3">
-                        <x-lucide-user-plus class="w-10 h-10 text-white -rotate-3" />
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary mb-6 shadow-sm">
+                        <x-lucide-user-plus class="w-10 h-10 text-white" />
                     </div>
                     <h2 class="text-4xl font-black text-base-content tracking-tight mb-2">
                         {{ __('profile.welcome') }}, <span class="text-primary">{{ Auth::user()->name }}</span>
@@ -26,7 +26,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center gap-2 px-1">
                             <x-lucide-contact class="w-5 h-5 text-primary" />
-                            <span class="text-sm font-bold uppercase tracking-widest text-base-content/40">Personal Information</span>
+                            <span class="text-sm font-bold uppercase tracking-widest text-base-content/40">Informasi Pribadi</span>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -77,7 +77,7 @@
                             <x-lucide-log-out class="w-5 h-5 mr-2" />
                             {{ __('profile.btn_cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary flex-1 w-full h-14 rounded-2xl text-white shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        <button type="submit" class="btn btn-primary flex-1 w-full h-14 rounded-2xl text-white shadow-sm hover:scale-[1.01] active:scale-95 transition-all">
                             <x-lucide-check-circle class="w-5 h-5 mr-2" />
                             {{ __('profile.btn_save') }}
                         </button>
@@ -165,7 +165,7 @@
                                 class="alert alert-warning shadow-lg border-l-4 border-warning-content/20 bg-warning/20 text-warning-content">
                                 <x-lucide-alert-triangle class="size-5" />
                                 <div class="flex flex-col text-white">
-                                    <span class="font-bold text-sm">Aduh, ada input yang ngaco:</span>
+                                    <span class="font-bold text-sm">Mohon periksa kembali data yang Anda masukkan:</span>
                                     <ul class="text-xs list-disc list-inside opacity-80">
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>

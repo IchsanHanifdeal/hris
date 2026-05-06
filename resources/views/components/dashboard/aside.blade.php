@@ -6,15 +6,16 @@
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
     
     <ul class="menu p-4 w-72 min-h-full bg-base-100 text-base-content border-r border-base-content/10
-               [&>li>a]:gap-3 [&>li]:my-1 [&>li]:font-medium [&>li]:text-[14.5px]
-               [&>_*_svg]:stroke-[1.5] [&>_*_svg]:size-[20px]">
+               [&>li>a]:gap-3 [&>li]:my-0.5 [&>li]:font-medium [&>li]:text-[14px]
+               [&>li>a]:transition-all [&>li>a]:duration-200
+               [&>_*_svg]:stroke-[1.5] [&>_*_svg]:size-[18px]">
         
         @php $setting = \App\Models\Setting::first(); @endphp
         <div class="pb-6 mb-4 border-b border-base-content/10 flex items-center gap-4 px-2 pt-2">
             @if($setting && $setting->app_logo)
                 <img src="{{ asset('storage/' . $setting->app_logo) }}" class="w-10 h-10 rounded-xl object-contain shadow-lg shadow-primary/10">
             @else
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20 text-white">
+                <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm text-white">
                     <x-lucide-command class="w-6 h-6" />
                 </div>
             @endif
@@ -29,102 +30,95 @@
             {{ __('menu.general') }}
         </span>
         <li>
-            <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+            <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                 <x-lucide-layout-dashboard />
                 {{ __('menu.dashboard') }}
             </a>
         </li>
 
         @if ($user?->hasRole(['admin', 'hrd']))
-            <span class="px-4 text-[11px] font-bold text-base-content/40 uppercase tracking-wider mb-2 mt-6">
+            <span class="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-wider mb-2 mt-6">
                 {{ __('menu.master_data') }}
             </span>
             
             <li>
-                <a href="{{ route('departments.index') }}" class="{{ request()->routeIs('departments.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('departments.index') }}" class="{{ request()->routeIs('departments.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-building-2 />
                     {{ __('menu.departments') }}
                 </a>
             </li>
             <li>
-                <a href="{{ route('positions.index') }}" class="{{ request()->routeIs('positions.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('positions.index') }}" class="{{ request()->routeIs('positions.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-shield-user />
                     {{ __('menu.positions') }}
                 </a>
             </li>
             <li>
-                <a href="{{ route('shifts.index') }}" class="{{ request()->routeIs('shifts.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('shifts.index') }}" class="{{ request()->routeIs('shifts.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-clock />
                     {{ __('menu.shifts') }}
                 </a>
             </li>
             <li>
-                <a href="{{ route('leave-types.index') }}" class="{{ request()->routeIs('leave-types.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('leave-types.index') }}" class="{{ request()->routeIs('leave-types.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-calendar-off />
                     {{ __('menu.leave_types') }}
                 </a>
             </li>
 
-            <span class="px-4 text-[11px] font-bold text-base-content/40 uppercase tracking-wider mb-2 mt-6">
+            <span class="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-wider mb-2 mt-6">
                 {{ __('menu.hr_management') }}
             </span>
             <li>
-                <a href="{{ route('employees.index') }}" class="{{ request()->routeIs('employees.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('employees.index') }}" class="{{ request()->routeIs('employees.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-users />
                     {{ __('menu.employees') }}
                 </a>
             </li>
             <li>
-                <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedules.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedules.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-calendar-range />
                     {{ __('menu.schedules') }}
                 </a>
             </li>
         @endif
 
-        <span class="px-4 text-[11px] font-bold text-base-content/40 uppercase tracking-wider mb-2 mt-6">
+        <span class="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-wider mb-2 mt-6">
             {{ __('menu.activities') }}
         </span>
         
         <li>
-            <a href="{{ route('attendances.index') }}" class="{{ request()->routeIs('attendances.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+            <a href="{{ route('attendances.index') }}" class="{{ request()->routeIs('attendances.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                 <x-lucide-map-pin />
                 {{ __('menu.attendance') }}
             </a>
         </li>
         
         <li>
-            <a href="{{ route('leave-requests.index') }}" class="{{ request()->routeIs('leave-requests.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+            <a href="{{ route('leave-requests.index') }}" class="{{ request()->routeIs('leave-requests.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                 <x-lucide-plane-takeoff />
                 {{ __('menu.leave_requests') }}
             </a>
         </li>
 
-        {{-- <li>
-            <a href="{{ route('payrolls.index') }}" class="{{ request()->routeIs('payrolls.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
-                <x-lucide-banknote />
-                {{ __('menu.payroll') }}
-            </a>
-        </li> --}}
-
-        <span class="px-4 text-[11px] font-bold text-base-content/40 uppercase tracking-wider mb-2 mt-6">
+        <span class="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-wider mb-2 mt-6">
             {{ __('menu.settings') }}
         </span>
 
         <li>
-            <a href="{{ route('settings.index') }}" class="{{ request()->routeIs('settings.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+            <a href="{{ route('settings.index') }}" class="{{ request()->routeIs('settings.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                 <x-lucide-settings />
                 {{ __('menu.settings') }}
             </a>
         </li>
 
         <div class="mt-auto pt-6">
-            <span class="px-4 text-[11px] font-bold text-base-content/40 uppercase tracking-wider mb-2">
+            <span class="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-wider mb-2">
                 {{ __('menu.system') }}
             </span>
             
             <li>
-                <a href="{{ route('profile.edit') }}" class="{{ request()->routeIs('profile.*') ? 'active bg-primary text-white' : 'hover:bg-base-200' }}">
+                <a href="{{ route('profile.edit') }}" class="{{ request()->routeIs('profile.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-user-cog />
                     {{ __('menu.profile') }}
                 </a>

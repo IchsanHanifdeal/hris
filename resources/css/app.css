@@ -1,5 +1,56 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-    themes: light --dracula, dark --dracula; 
+    themes: light, dark;
+}
+
+[data-theme="light"] {
+    --primary: #475467;
+    --primary-content: #ffffff;
+    --secondary: #667085;
+    --secondary-content: #ffffff;
+    --accent: #004eeb;
+    --accent-content: #ffffff;
+    --neutral: #101828;
+    --neutral-content: #ffffff;
+    --base-100: #ffffff;
+    --base-200: #fcfcfd;
+    --base-300: #f2f4f7;
+    --base-content: #101828;
+    --radius-box: 1rem;
+    --radius-btn: 0.5rem;
+}
+
+@layer base {
+    :root {
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+}
+
+.card {
+    @apply shadow-sm border border-base-300;
+}
+
+.btn {
+    @apply tracking-tight font-semibold;
+}
+
+.menu li > a {
+    @apply transition-all duration-200;
+}
+
+.menu li > a.menu-active {
+    @apply bg-accent/15 text-accent font-bold relative overflow-hidden;
+    background-image: linear-gradient(to right, oklch(var(--a) / 0.1), transparent);
+}
+
+.menu li > a.menu-active::before {
+    content: "";
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-accent rounded-r-full transition-all duration-300;
+}
+
+.menu li > a.menu-active svg {
+    @apply text-accent scale-110 transition-transform;
 }

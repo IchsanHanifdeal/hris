@@ -13,7 +13,7 @@
                     <x-lucide-calendar class="w-4 h-4 mr-2 text-primary" />
                     <span class="font-bold">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</span>
                 </div>
-                <a href="{{ route('employees.create') }}" class="btn btn-primary shadow-lg shadow-primary/20 rounded-2xl">
+                <a href="{{ route('employees.create') }}" class="btn btn-primary shadow-sm rounded-2xl">
                     <x-lucide-plus class="w-4 h-4 mr-1" />
                     {{ __('dashboard.add_employee') }}
                 </a>
@@ -82,9 +82,9 @@
                                     <td class="font-mono text-xs font-bold">{{ $attendance->time_in->format('H:i:s') }}</td>
                                     <td>
                                         @if($attendance->is_late)
-                                            <span class="badge badge-error badge-sm text-[9px] font-black">LATE</span>
+                                            <span class="badge badge-error badge-sm text-[9px] font-black">TERLAMBAT</span>
                                         @else
-                                            <span class="badge badge-success badge-sm text-[9px] font-black">ON TIME</span>
+                                            <span class="badge badge-success badge-sm text-[9px] font-black">TEPAT WAKTU</span>
                                         @endif
                                     </td>
                                     <td class="text-xs font-medium opacity-60">{{ $attendance->location_name ?? 'Remote' }}</td>

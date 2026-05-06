@@ -1,34 +1,34 @@
 <?php
 
 return [
-    'subtitle' => 'Ringkasan aktivitas dan operasional SDM hari ini.',
+    'subtitle' => 'Ringkasan aktivitas operasional hari ini.',
     'add_employee' => 'Tambah Karyawan',
     
     'stats' => [
         'total_employees'  => 'Total Karyawan',
         'present'          => 'Hadir Hari Ini',
-        'on_leave'         => 'Sedang Cuti',
+        'on_leave'         => 'Cuti & Izin',
         'late'             => 'Terlambat',
         'from_last_month'  => 'dari bulan lalu',
-        'attendance_rate'  => 'tingkat kehadiran',
-        'waiting_approval' => 'menunggu approval',
-        'need_attention'   => 'butuh perhatian segera',
+        'attendance_rate'  => 'laju kehadiran',
+        'waiting_approval' => 'butuh verifikasi',
+        'need_attention'   => 'butuh tinjauan',
     ],
 
     'recent_attendance' => [
-        'title'       => 'Absensi Terbaru',
+        'title'       => 'Kehadiran Terbaru',
         'view_all'    => 'Lihat Semua',
-        'th_employee' => 'Karyawan',
+        'th_employee' => 'Nama Karyawan',
         'th_time'     => 'Jam Masuk',
         'th_status'   => 'Status',
         'th_location' => 'Lokasi',
-        'empty'       => 'Belum ada aktivitas absensi hari ini.',
+        'empty'       => 'Belum ada data kehadiran hari ini.',
     ],
 
     'absence_overview' => [
-        'title'        => 'Siapa yang Absen?',
+        'title'        => 'Izin & Absen',
         'subtitle'     => 'Karyawan yang tidak bertugas hari ini.',
-        'view_details' => 'Lihat Detail Kehadiran',
+        'view_details' => 'Detail Kehadiran',
         'full_team'    => 'Tim Lengkap Hari Ini',
         'status' => [
             'leave'      => 'CUTI',
