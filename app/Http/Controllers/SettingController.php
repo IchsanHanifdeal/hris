@@ -16,33 +16,24 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'app_name' => 'required|string|max:255',
-            'pwa_name' => 'nullable|string|max:255',
-            'check_in_time' => 'nullable',
-            'check_out_time' => 'nullable',
             'address' => 'nullable|string',
             'latitude' => 'nullable|string',
             'longitude' => 'nullable|string',
             'radius' => 'nullable|integer',
-            'app_logo' => 'nullable|image|max:2048',
-            'app_favicon' => 'nullable|image|max:1024',
-            'pwa_logo' => 'nullable|image|max:2048',
         ]);
 
-        $setting = Setting::first() ?? new Setting();
-        
-        // Handle Logo Uploads
-        if ($request->hasFile('app_logo')) {
-            $validated['app_logo'] = $request->file('app_logo')->store('branding', 'public');
-        }
-        if ($request->hasFile('app_favicon')) {
-            $validated['app_favicon'] = $request->file('app_favicon')->store('branding', 'public');
-        }
-        if ($request->hasFile('pwa_logo')) {
-            $validated['pwa_logo'] = $request->file('pwa_logo')->store('branding', 'public');
+        // If GPS validation toggle is off or not present, set radius to 0 (which means disabled)
+        if (!$request->has('gps_validation') || $request->input('gps_validation') == '0') {
+            $validated['radius'] = 0;
+        } else {
+            // If GPS validation is on, ensure radius is at least 1, default to 100 if empty
+            $radius = $request->input('radius');
+            $validated['radius'] = ($radius && $radius > 0) ? (int)$radius : 100;
         }
 
-        Setting::updateOrCreate(['id' => 1], $validated);
+        $setting = Setting::first() ?? new Setting();
+        $setting->fill($validated);
+        $setting->save();
 
         return redirect()->back()->with('success', 'Settings updated successfully.');
     }

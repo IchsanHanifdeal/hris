@@ -1,6 +1,6 @@
 <?php
 return [
-    'title' => 'Shift Master',
+    'title' => 'Work Schedules',
     'subtitle' => 'Manage employee working hours and schedules.',
     'stats' => [
         'total' => 'Total Shifts',

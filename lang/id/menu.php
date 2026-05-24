@@ -10,13 +10,11 @@ return [
 
     // Items
     'dashboard'     => 'Dashboard',
-    'departments'   => 'Departemen',
-    'positions'     => 'Jabatan',
-    'shifts'        => 'Shift',
+    'shifts'        => 'Jadwal Kerja',
     'leave_types'   => 'Tipe Izin',
     'employees'     => 'Karyawan',
     'schedules'     => 'Jadwal',
-    'attendance'    => 'Kehadiran',
+    'attendance'    => 'Laporan Absensi',
     'leave'         => 'Izin & Cuti',
     'leave_requests'=> 'Pengajuan Cuti',
     'payroll'       => 'Payroll',

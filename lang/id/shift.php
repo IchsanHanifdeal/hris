@@ -1,6 +1,6 @@
 <?php
 return [
-    'title' => 'Master Shift',
+    'title' => 'Jadwal Kerja',
     'subtitle' => 'Kelola waktu operasional kerja karyawan.',
     'stats' => [
         'total' => 'Total Shift',

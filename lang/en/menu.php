@@ -10,13 +10,11 @@ return [
 
     // Items
     'dashboard'     => 'Dashboard',
-    'departments'   => 'Departments',
-    'positions'     => 'Positions',
-    'shifts'        => 'Shift Master',
+    'shifts'        => 'Work Schedules',
     'leave_types'   => 'Leave Types',
     'employees'     => 'Employees',
     'schedules'     => 'Work Schedules',
-    'attendance'    => 'Attendance',
+    'attendance'    => 'Attendance Report',
     'leave'         => 'Leave',
     'attendance_card' => 'Attendance',
     'leave_card' => 'Leave Balance',

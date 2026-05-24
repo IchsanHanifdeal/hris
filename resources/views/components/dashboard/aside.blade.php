@@ -42,20 +42,8 @@
             </span>
             
             <li>
-                <a href="{{ route('departments.index') }}" class="{{ request()->routeIs('departments.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
-                    <x-lucide-building-2 />
-                    {{ __('menu.departments') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('positions.index') }}" class="{{ request()->routeIs('positions.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
-                    <x-lucide-shield-user />
-                    {{ __('menu.positions') }}
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('shifts.index') }}" class="{{ request()->routeIs('shifts.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
-                    <x-lucide-clock />
+                    <x-lucide-calendar-clock />
                     {{ __('menu.shifts') }}
                 </a>
             </li>

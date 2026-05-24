@@ -45,7 +45,7 @@ class AttendanceService
             $now = now();
             $today = $now->toDateString();
 
-            if (isset($payload['latitude']) && isset($payload['longitude'])) {
+            if ($setting->radius > 0 && isset($payload['latitude']) && isset($payload['longitude'])) {
                 $distance = $this->calculateDistance(
                     $payload['latitude'], $payload['longitude'],
                     $setting->latitude, $setting->longitude
