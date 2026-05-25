@@ -112,7 +112,14 @@
                 
                 const badge = document.getElementById('quota-badge');
                 const val = document.getElementById('quota-value');
-                val.innerText = currentQuota;
+                
+                if (data.is_unlimited) {
+                    val.innerText = "Tak Terhingga";
+                    currentQuota = 9999;
+                } else {
+                    val.innerText = currentQuota;
+                }
+                
                 badge.classList.remove('hidden');
                 
                 validateDates();

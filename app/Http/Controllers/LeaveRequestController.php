@@ -50,8 +50,13 @@ class LeaveRequestController extends Controller
 
     public function getQuota($leaveTypeId)
     {
-        $quota = $this->leaveRequestService->getRemainingQuota(Auth::user()->employee->id, $leaveTypeId);
-        return response()->json(['quota' => $quota]);
+        $leaveType = \App\Models\LeaveType::findOrFail($leaveTypeId);
+        $isUnlimited = is_null($leaveType->quota);
+        $quota = $isUnlimited ? 9999 : $this->leaveRequestService->getRemainingQuota(Auth::user()->employee->id, $leaveTypeId);
+        return response()->json([
+            'quota' => $quota,
+            'is_unlimited' => $isUnlimited
+        ]);
     }
 
     public function updateStatus(LeaveRequest $leaveRequest, $status, Request $request)

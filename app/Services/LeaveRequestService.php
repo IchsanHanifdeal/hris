@@ -49,9 +49,12 @@ class LeaveRequestService
         $end = Carbon::parse($data['end_date']);
         $daysRequested = $start->diffInDays($end) + 1;
 
-        $remaining = $this->getRemainingQuota($employee->id, $data['leave_type_id']);
-        if ($daysRequested > $remaining) {
-            throw new \Exception("Sisa kuota tidak mencukupi. Anda hanya memiliki {$remaining} hari tersisa.");
+        $leaveType = LeaveType::findOrFail($data['leave_type_id']);
+        if (!is_null($leaveType->quota)) {
+            $remaining = $this->getRemainingQuota($employee->id, $data['leave_type_id']);
+            if ($daysRequested > $remaining) {
+                throw new \Exception("Sisa kuota tidak mencukupi. Anda hanya memiliki {$remaining} hari tersisa.");
+            }
         }
 
         $data['employee_id'] = $employee->id;
@@ -68,6 +71,10 @@ class LeaveRequestService
     public function getRemainingQuota($employeeId, $leaveTypeId)
     {
         $leaveType = LeaveType::findOrFail($leaveTypeId);
+        
+        if (is_null($leaveType->quota)) {
+            return 9999;
+        }
         
         $usedDays = LeaveRequest::where('employee_id', $employeeId)
             ->where('leave_type_id', $leaveTypeId)

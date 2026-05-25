@@ -95,7 +95,7 @@
 
         <li>
             <a href="{{ route('settings.index') }}" class="{{ request()->routeIs('settings.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
-                <x-lucide-settings />
+                <x-lucide-map />
                 {{ __('menu.settings') }}
             </a>
         </li>

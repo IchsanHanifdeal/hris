@@ -27,7 +27,7 @@ return [
     'days'          => 'Days',
     'home'          => 'Home',
     'select_language' => 'Select Language',
-    'settings'      => 'Settings',
+    'settings'      => 'Maps',
     'my_work'       => 'History',
 
     // Logout Modal

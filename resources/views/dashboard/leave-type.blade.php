@@ -41,7 +41,7 @@
                 <td class="font-black text-base-content">{{ $item->name }}</td>
                 <td class="text-center">
                     <span class="px-4 py-2 bg-warning/10 text-warning rounded-xl font-mono font-black text-sm border border-warning/20">
-                        {{ $item->quota }} {{ __('menu.days') ?? 'Hari' }}
+                        {{ is_null($item->quota) ? 'Tak Terhingga' : ($item->quota . ' ' . (__('menu.days') ?? 'Hari')) }}
                     </span>
                 </td>
                 <td class="flex items-center gap-3 justify-center py-6">
@@ -64,10 +64,14 @@
                         </div>
                         <div class="form-control w-full mt-4">
                             <label class="label"><span class="label-text font-bold">{{ __('leave-type.modal.label_days') }}</span></label>
-                            <div class="relative">
-                                <input type="number" name="quota" value="{{ $item->quota }}" class="input input-bordered w-full rounded-2xl bg-base-200/50 h-14 font-mono font-bold pr-16" min="1" required>
+                            <div class="relative" id="edit_{{ $item->id }}_quota_input_container">
+                                <input type="number" name="quota" id="edit_{{ $item->id }}_quota_input" value="{{ $item->quota }}" class="input input-bordered w-full rounded-2xl bg-base-200/50 h-14 font-mono font-bold pr-16 {{ is_null($item->quota) ? 'opacity-50' : '' }}" min="1" {{ is_null($item->quota) ? 'disabled' : 'required' }}>
                                 <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[10px] font-black opacity-30 uppercase">Hari</span>
                             </div>
+                            <label class="label cursor-pointer justify-start gap-3 mt-2">
+                                <input type="checkbox" name="is_unlimited" id="edit_{{ $item->id }}_is_unlimited" onchange="toggleQuotaInput('edit_{{ $item->id }}')" class="checkbox checkbox-warning rounded-lg" {{ is_null($item->quota) ? 'checked' : '' }}>
+                                <span class="label-text font-bold text-xs">Jatah Cuti Tak Terhingga (Unlimited)</span>
+                            </label>
                         </div>
                     </x-dashboard.modal.edit>
 
@@ -97,12 +101,43 @@
 
         <div class="form-control w-full mt-6 text-left">
             <label class="label"><span class="label-text font-bold opacity-70 italic">{{ __('leave-type.modal.label_days') }}</span></label>
-            <label class="input input-bordered w-full flex items-center gap-4 bg-base-200/40 border-base-content/10 rounded-2xl h-16 px-6 focus-within:border-warning transition-all">
+            <label id="add_quota_input_container" class="input input-bordered w-full flex items-center gap-4 bg-base-200/40 border-base-content/10 rounded-2xl h-16 px-6 focus-within:border-warning transition-all">
                 <x-lucide-calendar-range class="size-5 opacity-30" />
-                <input type="number" name="quota" class="grow w-full font-mono font-bold bg-transparent border-none focus:ring-0" placeholder="12" min="1" required>
+                <input type="number" name="quota" id="add_quota_input" class="grow w-full font-mono font-bold bg-transparent border-none focus:ring-0" placeholder="12" min="1" required>
                 <span class="font-black opacity-30 text-xs uppercase">Hari</span>
+            </label>
+            <label class="label cursor-pointer justify-start gap-3 mt-2">
+                <input type="checkbox" name="is_unlimited" id="add_is_unlimited" onchange="toggleQuotaInput('add')" class="checkbox checkbox-warning rounded-lg">
+                <span class="label-text font-bold text-xs">Jatah Cuti Tak Terhingga (Unlimited)</span>
             </label>
         </div>
     </x-dashboard.modal.add>
+    @push('scripts')
+    <script>
+        function toggleQuotaInput(prefix) {
+            const checkbox = document.getElementById(prefix + '_is_unlimited');
+            const input = document.getElementById(prefix + '_quota_input');
+            const container = document.getElementById(prefix + '_quota_input_container');
+            
+            if (checkbox.checked) {
+                input.disabled = true;
+                input.removeAttribute('required');
+                input.value = '';
+                input.classList.add('opacity-50');
+                if (container) {
+                    container.classList.add('opacity-50');
+                }
+            } else {
+                input.disabled = false;
+                input.setAttribute('required', 'required');
+                input.value = input.defaultValue || '12';
+                input.classList.remove('opacity-50');
+                if (container) {
+                    container.classList.remove('opacity-50');
+                }
+            }
+        }
+    </script>
+    @endpush
 
 </x-dashboard.main>

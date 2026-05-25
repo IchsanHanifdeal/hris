@@ -12,6 +12,15 @@ class LeaveTypeRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('is_unlimited') || !$this->has('quota')) {
+            $this->merge([
+                'quota' => null,
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         return [
@@ -21,7 +30,7 @@ class LeaveTypeRequest extends FormRequest
                 'max:255',
                 Rule::unique('leave_types', 'name')->ignore($this->leave_type)
             ],
-            'quota' => 'required|integer|min:0|max:12',
+            'quota' => 'nullable|integer|min:0',
         ];
     }
 

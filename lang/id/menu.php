@@ -23,7 +23,7 @@ return [
     'days'          => 'Hari',
     'home'          => 'Beranda',
     'select_language' => 'Pilih Bahasa',
-    'settings' => 'Pengaturan',
+    'settings' => 'Maps',
     'my_work' => 'Riwayat',
 
     // Logout Modal
