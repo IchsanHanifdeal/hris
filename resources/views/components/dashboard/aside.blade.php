@@ -63,12 +63,12 @@
                     {{ __('menu.employees') }}
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('schedules.index') }}" class="{{ request()->routeIs('schedules.*') ? 'menu-active' : 'hover:bg-base-200/50 hover:text-primary' }}">
                     <x-lucide-calendar-range />
                     {{ __('menu.schedules') }}
                 </a>
-            </li>
+            </li> --}}
         @endif
 
         <span class="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-wider mb-2 mt-6">

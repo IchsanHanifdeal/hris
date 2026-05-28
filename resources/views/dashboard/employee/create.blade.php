@@ -10,6 +10,7 @@
 
         <form action="{{ route('employees.store') }}" method="POST" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             @csrf
+            <input type="hidden" name="department_id" value="{{ $departments->firstWhere('name', 'Information Technology')?->id ?? 1 }}">
 
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-base-100/50 backdrop-blur-xl rounded-[2.5rem] p-8 border border-base-content/5 shadow-sm relative overflow-hidden h-full">
@@ -81,17 +82,6 @@
                         </div>
 
                         <div class="form-control">
-                            <label class="label px-1"><span class="label-text font-black text-[10px] uppercase opacity-40">{{ __('employee.modal.label_dept') }}</span></label>
-                            <select name="department_id" class="select select-bordered bg-base-200/50 rounded-2xl h-14 font-bold text-sm focus:border-secondary transition-all" required>
-                                <option disabled {{ old('department_id') ? '' : 'selected' }}>---</option>
-                                @foreach($departments as $dept)
-                                    <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>{{ $dept->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('department_id') <span class="text-error text-[10px] mt-2 ml-2 font-bold">{{ $message }}</span> @enderror
-                        </div>
-
-                        <div class="form-control md:col-span-2">
                             <label class="label px-1"><span class="label-text font-black text-[10px] uppercase opacity-40">{{ __('employee.modal.label_position') }}</span></label>
                             <select name="position_id" class="select select-bordered bg-base-200/50 rounded-2xl h-14 font-bold text-sm focus:border-secondary transition-all w-full" required>
                                 <option disabled {{ old('position_id') ? '' : 'selected' }}>---</option>
